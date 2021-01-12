@@ -1,0 +1,19 @@
+{
+  "name": "chess-league",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dalton-Klein/chess-league.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dalton-Klein/chess-league/issues"
+  },
+  "homepage": "https://github.com/Dalton-Klein/chess-league#readme"
+}
