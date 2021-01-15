@@ -5,15 +5,14 @@ const chessMatchController = require('./controllers/match.controller');
 const router = express.Router();
 
 router.post('/checkingForMove', chessMoveController.getLatestMove);
-router.post('/moveMade', chessMoveController.postMove);
-router.post('/addAuth', chessAuthController.addAuth);
-router.post('/getAuth', chessAuthController.getLatestAuth);
-router.post('/addMatch', chessMatchController.addMatch);
-router.post('/getMatches', chessMatchController.getMatches);
+router.post('/moveMade',        chessMoveController.postMove);
+router.post('/addAuth',         chessAuthController.addAuth);
+router.post('/getAuth',         chessAuthController.getLatestAuth);
+router.post('/addMatch',        chessMatchController.addMatch);
+router.post('/getMatches',      chessMatchController.getMatches);
 router.post('/lookForOpponent', chessMatchController.lookForOpponent);
-router.post('/acceptMatch', chessMatchController.acceptMatch);
-router.post('/startMatch', chessMatchController.startMatch);
-//router.delete('/chess/:id', chessController.deletechess);
+router.post('/acceptMatch',     chessMatchController.acceptMatch);
+router.post('/startMatch',      chessMatchController.startMatch);
 //router.put('/chess/:id/down', chessController.voteDownchess);
 //router.put('/chess/:id/up', chessController.voteUpchess);
 

@@ -14,7 +14,10 @@ exports.addMatch = async (req, res) => {
   console.log('♟️ A Player Created A Match ♟️:  ', req.body);
   try {
     const { username, level, rating, time, opponent } = req.body;
-    const match = await ChessMatch.create({ username, level, rating, time, opponent });
+    let hostColor;
+    if (Math.random() >= .5) hostColor = 'white'
+    else hostColor = 'black';
+    const match = await ChessMatch.create({ username, hostColor, level, rating, time, opponent });
     res.status(201);
     res.send(match);
   } catch (error) {
