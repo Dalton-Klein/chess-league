@@ -5,6 +5,7 @@ const TopicSchema = new Schema({
   level:        {type: String, required: true},
   rating:       {type: String, required: true},
   time:         {type: String, required: true},
+  opponent:     {type: String, required: true},
   published_at: {type: Date, default: Date.now},
 });
 
