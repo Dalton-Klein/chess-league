@@ -1,20 +1,20 @@
-const Topic = require('../models/topic.model');
+const ChessMove = require('../models/chessMove.model');
 
-exports.getAllTopics = async (_, res) => {
-  // console.log('What is res? ', res);
+exports.getLatestMove = async (req, res) => {
+  console.log('♟️ A Player Requested Latest Move ♟️:  ', req.body);
   try {
-    const topics = await Topic.find();
-    res.send(topics);
+    const latestMove = await ChessMove.find().sort({ _id: -1 }).limit(1)
+    res.send(latestMove);
   } catch (error) {
     res.sendStatus(500);
   }
 };
 
-exports.postOneTopic = async (req, res) => {
-  // console.log('What is req? ', req.body);
+exports.postMove = async (req, res) => {
+  console.log('♟️ A Player Moved ♟️:  ', req.body);
   try {
-    const { title } = req.body;
-    const topic = await Topic.create({ title });
+    const { color, pieceName, column, row } = req.body;
+    const topic = await ChessMove.create({ color, pieceName, column, row });
     res.status(201);
     res.send(topic);
   } catch (error) {
