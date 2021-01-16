@@ -13,7 +13,6 @@ router.post('/getMatches',      chessMatchController.getMatches);
 router.post('/lookForOpponent', chessMatchController.lookForOpponent);
 router.post('/acceptMatch',     chessMatchController.acceptMatch);
 router.post('/startMatch',      chessMatchController.startMatch);
-router.post('/deleteMatch',      chessMatchController.deleteMatch);
 //router.put('/chess/:id/down', chessController.voteDownchess);
 //router.put('/chess/:id/up', chessController.voteUpchess);
 

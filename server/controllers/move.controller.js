@@ -3,7 +3,8 @@ const ChessMove = require('../models/chessMove.model');
 exports.getLatestMove = async (req, res) => {
   console.log('♟️ A Player Requested Latest Move ♟️:  ', req.body);
   try {
-    const latestMove = await ChessMove.find().sort({ _id: -1 }).limit(1)
+    const { matchid } = req.body
+    const latestMove = await ChessMove.find({ matchid: matchid }).sort({ _id: -1 }).limit(1)
     res.send(latestMove);
   } catch (error) {
     res.sendStatus(500);
@@ -13,8 +14,8 @@ exports.getLatestMove = async (req, res) => {
 exports.postMove = async (req, res) => {
   console.log('♟️ A Player Moved ♟️:  ', req.body);
   try {
-    const { color, pieceName, fromColumn, fromRow, toColumn, toRow } = req.body;
-    const topic = await ChessMove.create({ color, pieceName, fromColumn, fromRow, toColumn, toRow });
+    const { matchid, color, pieceName, fromColumn, fromRow, toColumn, toRow } = req.body;
+    const topic = await ChessMove.create({ matchid, color, pieceName, fromColumn, fromRow, toColumn, toRow });
     res.status(201);
     res.send(topic);
   } catch (error) {

@@ -1,11 +1,12 @@
 const { Schema, model } = require('mongoose');
 
 const TopicSchema = new Schema({
+  matchid:      {type: String, required: true},
   color:        {type: String, required: true},
-  pieceName:        {type: String, required: true},
-  fromColumn:        {type: Number, default: 0},
-  fromRow:        {type: Number, default: 0},
-  toColumn:        {type: Number, default: 0},
+  pieceName:    {type: String, required: true},
+  fromColumn:   {type: Number, default: 0},
+  fromRow:      {type: Number, default: 0},
+  toColumn:     {type: Number, default: 0},
   toRow:        {type: Number, default: 0},
   published_at: {type: Date, default: Date.now},
 });

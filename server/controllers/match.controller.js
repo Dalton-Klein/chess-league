@@ -49,8 +49,8 @@ exports.acceptMatch = async (req, res) => {
     const update = { opponent: opponent }
     const match = await ChessMatch.findOneAndUpdate(filter, update, { new:true }, (err, doc) => {
       if (err) console.log('Error Updating Opponent');
-      else console.log('UPDATED OPPONENT: ', doc);
     })
+    console.log('Accepted Match & Updated Opponent: ', match);
     res.send(match);
   } catch (error) {
     res.sendStatus(500);
@@ -62,24 +62,16 @@ exports.acceptMatch = async (req, res) => {
     try {
       const { username } = req.body;
       let filter = { username: username }
-      const match = await ChessMatch.findOneAndDelete(filter, function (err, docs) 
-      {console.log("Delete Result : ", docs)} 
+      const match = await ChessMatch.findOne(filter, function (err, doc) 
+        {if (err) console.log('Error Starting Match!!!')}
       );
+      {console.log("Find Result : ", match)} 
       res.send(match);
+      const removeMatch = await ChessMatch.findOneAndDelete(filter, function (err, docs) 
+        {if (err) console.log('Error Deleting Match!!!')} 
+      );
     } catch (error) {
       res.sendStatus(500);
     }
   }
-  
-  exports.deleteMatch = async (req, res) => {
-    console.log('♟️ A Player Deleted A Match ♟️:  ', req.body);
-    try {
-      const { username } = req.body;
-      const match = await ChessMatch.deleteOne({ username: username });
-      res.status(201);
-      res.send(match);
-    } catch (error) {
-      res.sendStatus(500);
-    }
-  };
   
