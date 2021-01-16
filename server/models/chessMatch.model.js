@@ -1,6 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const TopicSchema = new Schema({
+  id:            {type: String, required: true},
   username:      {type: String, required: true},
   hostColor:     {type: String, required: true},
   level:         {type: String, required: true},

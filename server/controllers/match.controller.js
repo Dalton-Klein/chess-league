@@ -17,7 +17,9 @@ exports.addMatch = async (req, res) => {
     let hostColor;
     if (Math.random() >= .5) hostColor = 'white'
     else hostColor = 'black';
-    const match = await ChessMatch.create({ username, hostColor, level, rating, time, opponent });
+    let id = await ChessMatch.find().sort({id: -1}).limit(1);
+    id = parseInt(id[0].id) + 1;
+    const match = await ChessMatch.create({ id, username, hostColor, level, rating, time, opponent });
     res.status(201);
     res.send(match);
   } catch (error) {
@@ -28,10 +30,10 @@ exports.addMatch = async (req, res) => {
 exports.lookForOpponent = async (req, res) => {
   console.log('♟️ CheckForOpponent ♟️:  ', req.body.username);
   try {
-    const { username, opponentUsername } = req.body;
+    const { username } = req.body;
     let filter = { username: username }
     const match = await ChessMatch.findOne(filter, function (err, docs) 
-      {console.log("Find Result : ", docs)} 
+      {console.log('Find Result : ', docs)} 
     );
     res.send(match);
   } catch (error) {
@@ -42,11 +44,12 @@ exports.lookForOpponent = async (req, res) => {
 exports.acceptMatch = async (req, res) => {
   console.log('♟️ A Player ACCEPTED A Match ♟️:  ', req.body);
   try {
-    const { username, opponentUsername } = req.body;
+    const { username, opponent } = req.body;
     let filter = { username: username }
-    const update = { opponent: opponentUsername }
-    const match = await ChessMatch.findOneAndUpdate(filter, update, {
-      new:true
+    const update = { opponent: opponent }
+    const match = await ChessMatch.findOneAndUpdate(filter, update, { new:true }, (err, doc) => {
+      if (err) console.log('Error Updating Opponent');
+      else console.log('UPDATED OPPONENT: ', doc);
     })
     res.send(match);
   } catch (error) {
@@ -68,4 +71,15 @@ exports.acceptMatch = async (req, res) => {
     }
   }
   
+  exports.deleteMatch = async (req, res) => {
+    console.log('♟️ A Player Deleted A Match ♟️:  ', req.body);
+    try {
+      const { username } = req.body;
+      const match = await ChessMatch.deleteOne({ username: username });
+      res.status(201);
+      res.send(match);
+    } catch (error) {
+      res.sendStatus(500);
+    }
+  };
   
