@@ -12,8 +12,8 @@ exports.getLatestMove = async (req, res) => {
 };
 
 exports.postMove = async (req, res) => {
-  console.log('♟️ A Player Moved ♟️:  ', req.body);
   try {
+    console.log('♟️ A Player Moved ♟️:  ', req.body);
     const { matchid, color, pieceName, fromColumn, fromRow, toColumn, toRow } = req.body;
     const topic = await ChessMove.create({ matchid, color, pieceName, fromColumn, fromRow, toColumn, toRow });
     res.status(201);
