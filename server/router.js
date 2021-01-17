@@ -5,13 +5,13 @@ const chessMatchController = require('./controllers/match.controller');
 const router = express.Router();
 
 //Authentication Related Routes
-router.post('/singin',         chessAuthController.getLatestAuth);
+router.post('/signin',          chessAuthController.signin);
+router.post('/signup',          chessAuthController.signup);
 
 //Game Related Routes
 router.post('/checkingForMove', chessMoveController.getLatestMove);
 router.post('/moveMade',        chessMoveController.postMove);
 router.post('/finishedGame',    chessMoveController.deleteMove);
-router.post('/addAuth',         chessAuthController.addAuth);
 router.post('/addMatch',        chessMatchController.addMatch);
 router.post('/getMatches',      chessMatchController.getMatches);
 router.post('/lookForOpponent', chessMatchController.lookForOpponent);

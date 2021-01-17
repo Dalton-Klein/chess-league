@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const TopicSchema = new Schema({
+const MatchSchema = new Schema({
   id:            {type: String, required: true},
   username:      {type: String, required: true},
   hostColor:     {type: String, required: true},
@@ -11,4 +11,4 @@ const TopicSchema = new Schema({
   published_at:  {type: Date, default: Date.now},
 });
 
-module.exports = model('chess_matches', TopicSchema);
+module.exports = model('chess_matches', MatchSchema);
