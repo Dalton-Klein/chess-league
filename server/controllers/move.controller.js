@@ -12,22 +12,44 @@ exports.getLatestMove = async (req, res) => {
 };
 
 exports.postMove = async (req, res) => {
-  console.log('♟️ A Player Moved ♟️:  ', req.body);
   try {
+    console.log('♟️ A Player Moved ♟️:  ', req.body);
     const { matchid, color, pieceName, fromColumn, fromRow, toColumn, toRow } = req.body;
-    const topic = await ChessMove.create({ matchid, color, pieceName, fromColumn, fromRow, toColumn, toRow });
+    let filter = { matchid: matchid }
+    const isFirstMove = await ChessMove.findOne(filter, (err, doc) => {
+      if (err) console.log('Error Updating Opponent');
+    })
+    let moveSaving;
+    if (isFirstMove === [] || isFirstMove === null ) {
+      moveSaving = await ChessMove.create({ matchid, color, pieceName, fromColumn, fromRow, toColumn, toRow });
+    }
+    else {
+      const update = {$set :
+        { color: color, 
+          pieceName: pieceName, 
+          fromColumn: fromColumn, 
+          fromRow: fromRow,
+          toColumn: toColumn, 
+          toRow: toRow 
+        } 
+      }
+      moveSaving = await ChessMove.findOneAndUpdate(filter, update, { new: true, useFindAndModify: false }, (err, doc) => {
+        if (err) console.log('Error Updating Opponent');
+      })
+    }
+    console.log('Updating....', moveSaving);
     res.status(201);
-    res.send(topic);
+    res.send(moveSaving);
   } catch (error) {
     res.sendStatus(500);
   }
 };
 
-exports.deleteTopic = async (req, res) => {
+exports.deleteMove = async (req, res) => {
   // console.log('What is req? ', req.body);
   try {
     const { id } = req.params;
-    await Topic.deleteOne({ _id: id });
+    await ChessMove.deleteOne({ id: id });
     res.sendStatus(204);
   } catch (error) {
     res.sendStatus(500);

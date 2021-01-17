@@ -1,12 +1,13 @@
 const ChessAuth = require('../models/chessAuth.model');
 
-exports.getLatestAuth = async (req, res) => {
+exports.signin = async (req, res) => {
   try {
+    
     const auth = await ChessAuth.find().sort({ _id: -1 }).limit(1)
     console.log('♛ A Player Requested Latest Auth ♛:  ', auth);
     res.send(auth);
   } catch (error) {
-    res.sendStatus(500);
+    res.sendStatus(500); 
   }
 };
 

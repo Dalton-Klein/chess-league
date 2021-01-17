@@ -11,4 +11,4 @@ const TopicSchema = new Schema({
   published_at: {type: Date, default: Date.now},
 });
 
-module.exports = model('chess_move_made', TopicSchema);
+module.exports = model('chess_active_move', TopicSchema);

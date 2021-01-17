@@ -17,8 +17,12 @@ exports.addMatch = async (req, res) => {
     let hostColor;
     if (Math.random() >= .5) hostColor = 'white'
     else hostColor = 'black';
-    let id = await ChessMatch.find().sort({id: -1}).limit(1);
-    id = parseInt(id[0].id) + 1;
+    let id = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    for ( var i = 0; i < 10; i++ ) {
+      id += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
     const match = await ChessMatch.create({ id, username, hostColor, level, rating, time, opponent });
     res.status(201);
     res.send(match);
@@ -47,7 +51,7 @@ exports.acceptMatch = async (req, res) => {
     const { username, opponent } = req.body;
     let filter = { username: username }
     const update = { opponent: opponent }
-    const match = await ChessMatch.findOneAndUpdate(filter, update, { new:true }, (err, doc) => {
+    const match = await ChessMatch.findOneAndUpdate(filter, update, { new: true }, (err, doc) => {
       if (err) console.log('Error Updating Opponent');
     })
     console.log('Accepted Match & Updated Opponent: ', match);
