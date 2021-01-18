@@ -7,6 +7,7 @@ const router = express.Router();
 //Authentication Related Routes
 router.post('/signin',          chessAuthController.signin);
 router.post('/signup',          chessAuthController.signup);
+router.post('/guestSignIn',     chessAuthController.guestSignIn);
 
 //Game Related Routes
 router.post('/checkingForMove', chessMoveController.getLatestMove);

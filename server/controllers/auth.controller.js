@@ -1,7 +1,8 @@
 const ChessAuth = require('../models/chessAuth.model');
 const ChessToken = require('../models/chessToken.model');
+const ChessUserSave = require('../models/chessUserSave.model');
 const bcrypt    = require('bcrypt')
-const keygen = require('../services/services');
+const services = require('../services/services');
 
 exports.signin = async (req, res) => {
   try {
@@ -13,10 +14,11 @@ exports.signin = async (req, res) => {
     if ( user !== null) {
       const validPass = await bcrypt.compare(password, user.hashed)
       if ( validPass ) {
-        let token = keygen.keyGen(15);
+        let token = services.keyGen(15);
         const deleteOldTokens = await ChessToken.deleteMany({email: email})
         const newToken = await ChessToken.create({ email, token });
-        result = {success: token}
+        const userSave = await ChessUserSave.findOne({username: user.username})
+        result = {success: token, email: user.email, username: user.username, rating: userSave.rating, rankLevel: userSave.rankLevel, rankExp: userSave.rankExp}
       }
       else result = {error: 'One of your credentials is incorrect!'};
     } else result = {error: 'One of your credentials is incorrect!'};
@@ -46,8 +48,17 @@ exports.signup = async (req, res) => {
     }
     res.send(result);
   } catch (error) {
-    console.log('What is error: ', error);
     res.sendStatus(500); 
   }
 };
 
+exports.guestSignIn = async (req, res) => {
+  try {
+    console.log('♛ A Player Signed In As Guest ♛:  ');
+    const { guestNum } = req.body;
+    let result = '';
+    res.send(result);
+  } catch (error) {
+    res.sendStatus(500); 
+  }
+};

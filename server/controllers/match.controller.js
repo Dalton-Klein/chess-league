@@ -4,7 +4,8 @@ const services = require('../services/services');
 exports.getMatches = async (req, res) => {
   try {
     const { email, token } = req.body
-    if ( services.checkToken( email, token ) === true ) {
+    const tokenValid = await services.checkToken( email, token );
+    if ( tokenValid === true ) {
       const allMatches = await ChessMatch.find()
       console.log('♛ A Player Requested Matches ♛:  ', allMatches);
       res.send(allMatches);
@@ -19,7 +20,8 @@ exports.addMatch = async (req, res) => {
   console.log('♟️ A Player Created A Match ♟️:  ', req.body);
   try {
     const { username, email, token, level, rating, time, opponent } = req.body;
-    if ( services.checkToken( email, token ) === true ) {
+    const tokenValid = await services.checkToken( email, token );
+    if ( tokenValid === true ) {
       let hostColor;
       if (Math.random() >= .5) hostColor = 'white'
       else hostColor = 'black';
@@ -38,7 +40,8 @@ exports.lookForOpponent = async (req, res) => {
   console.log('♟️ CheckForOpponent ♟️:  ', req.body.username);
   try {
     const { username, email, token } = req.body;
-    if ( services.checkToken( email, token ) === true ) {
+    const tokenValid = await services.checkToken( email, token );
+    if ( tokenValid === true ) {
       let filter = { username: username }
       const match = await ChessMatch.findOne(filter, function (err, docs) 
         {console.log('Find Result : ', docs)} 
@@ -55,7 +58,8 @@ exports.acceptMatch = async (req, res) => {
   console.log('♟️ A Player ACCEPTED A Match ♟️:  ', req.body);
   try {
     const { username, email, token, opponent } = req.body;
-    if ( services.checkToken( email, token ) === true ) {
+    const tokenValid = await services.checkToken( email, token );
+    if ( tokenValid === true ) {
       let filter = { username: username }
       const update = { opponent: opponent }
       const match = await ChessMatch.findOneAndUpdate(filter, update, { new: true }, (err, doc) => {
@@ -74,7 +78,8 @@ exports.acceptMatch = async (req, res) => {
     console.log('♟️ Two Players Started A Match ♟️:  ', req.body);
     try {
       const { username, email, token } = req.body;
-      if ( services.checkToken( email, token ) === true ) {
+      const tokenValid = await services.checkToken( email, token );
+      if ( tokenValid === true ) {
         let filter = { username: username }
         const match = await ChessMatch.findOne(filter, function (err, doc) 
           {if (err) console.log('Error Starting Match!!!')}

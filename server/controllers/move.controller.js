@@ -1,10 +1,12 @@
 const ChessMove = require('../models/chessMove.model');
+const services = require('../services/services');
 
 exports.getLatestMove = async (req, res) => {
   console.log('♟️ A Player Requested Latest Move ♟️:  ', req.body);
   try {
     const { email, token, matchid } = req.body;
-      if ( services.checkToken( email, token ) === true ) {
+    const tokenValid = await services.checkToken( email, token );
+    if ( tokenValid === true ) {
         const latestMove = await ChessMove.find({ matchid: matchid }).sort({ _id: -1 }).limit(1)
         res.send(latestMove);
       }
@@ -16,10 +18,11 @@ exports.getLatestMove = async (req, res) => {
 
 exports.postMove = async (req, res) => {
   try {
-    console.log('♟️ A Player Moved ♟️:  ', req.body);
     const { email, token, matchid, color, pieceName, fromColumn, fromRow, toColumn, toRow } = req.body;
-      if ( services.checkToken( email, token ) === true ) {
-        let filter = { matchid: matchid }
+    const tokenValid = await services.checkToken( email, token );
+    if ( tokenValid === true ) {
+      console.log('♟️ A Player Moved ♟️:  ', req.body);
+      let filter = { matchid: matchid }
         const isFirstMove = await ChessMove.findOne(filter)
         let moveSaving;
         if (isFirstMove === [] || isFirstMove === null ) {
@@ -43,6 +46,7 @@ exports.postMove = async (req, res) => {
       else res.send({error: 'Not Authenticated'})
   } catch (error) {
     res.sendStatus(500);
+    console.log(error);
   }
 };
 
@@ -50,7 +54,8 @@ exports.deleteMove = async (req, res) => {
   // console.log('What is req? ', req.body);
   try {
     const { email, token, id } = req.body;
-      if ( services.checkToken( email, token ) === true ) {
+    const tokenValid = await services.checkToken( email, token );
+    if ( tokenValid === true ) {
         await ChessMove.deleteOne({ id: id });
         res.sendStatus(204);
       }

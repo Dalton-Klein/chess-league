@@ -11,10 +11,13 @@ exports.keyGen = ( length ) => {
 }
 
 exports.checkToken = async ( email, token ) => {
-  const check = await ChessToken.find({ email: email });
+  let check = await ChessToken.find({ email: email });
+  check = check[0];
   let result = '';
   if( check.email ) {
-    if ( check.token === token ) result = true
+    if ( check.token === token ) {
+      result = true
+    }
     else result = false
   }
   else result = false
