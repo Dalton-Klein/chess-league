@@ -1,12 +1,14 @@
 import './App.css';
-import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
-import Canvas from './components/canvas'
-export default function App() {
+import Navbar from './components/navbar/index'
+import Canvas from './components/canvas/index'
+
+function App() {
   return (
     <div className="App">
+      <Navbar></Navbar>
       <Canvas></Canvas>
     </div>
-    
-  )
+  );
 }
 
+export default App;
