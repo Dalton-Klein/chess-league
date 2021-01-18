@@ -36,6 +36,17 @@ exports.addMatch = async (req, res) => {
   }
 };
 
+exports.removeMatch = async (req, res) => {
+  try {
+    const { username } = req.body;
+    const filter = { username: username };
+    const matchRemoved = await ChessMatch.deleteMany(filter);
+    res.send({success: true})
+  } catch (error) {
+    res.sendStatus(500);
+  }
+}
+
 exports.lookForOpponent = async (req, res) => {
   console.log('♟️ Checking For Opponent ♟️:  ', req.body.username);
   try {

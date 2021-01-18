@@ -50,13 +50,19 @@ const express = require('express');
 const cors = require('cors');
 const router = require('./router');
 const connection = require('./models/index');
-const port = 3001;
+const port = process.env.PORT || 3001;
 const app = express();
 
 app
   .use(cors())
   .use(express.json())
   .use(router);
+
+//Heroku
+if (process.env.NODE_ENV === 'production' ) {
+  app.use(express.static('client/build'));
+}//End Heroku
+
 
 (async function () {
   try {
