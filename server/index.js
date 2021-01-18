@@ -2,14 +2,15 @@
 const express = require('express');
 const cors = require('cors');
 const router = require('./router');
-const connection = require('./models/index');
 const port = process.env.PORT || 3001;
 const app = express();
 
 app
-  .use(cors())
-  .use(express.json())
-  .use(router);
+.use(cors())
+.use(express.json())
+.use(router);
+
+const connection = require('./models/index');
 
 (async function () {
   try {
