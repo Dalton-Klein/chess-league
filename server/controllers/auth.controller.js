@@ -40,7 +40,11 @@ exports.signup = async (req, res) => {
     let result = '';
     if (userCheck === null  && emailCheck === null) {
       const hashed = await bcrypt.hash(password, 10);
-      const newUser = await ChessAuth.create({ email, username, hashed });
+      const newUser = ChessAuth.create({ email, username, hashed });
+      let rating = 500;
+      let rankLevel = 1;
+      let rankExp = 0;
+      const storeSave = ChessUserSave.create({ username, rating, rankLevel, rankExp})
       result = {success: 'User created'}
     } else {
       if (userCheck !== null) result = {error: 'Username is taken'};
@@ -56,7 +60,10 @@ exports.guestSignIn = async (req, res) => {
   try {
     console.log('♛ A Player Signed In As Guest ♛:  ');
     const { guestNum } = req.body;
-    let result = '';
+    const email = guestNum
+    let token = services.keyGen(15);
+    const newToken = await ChessToken.create({ email, token });
+    let result = {username: guestNum, token: token }; 
     res.send(result);
   } catch (error) {
     res.sendStatus(500); 

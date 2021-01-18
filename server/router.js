@@ -10,13 +10,13 @@ router.post('/signup',          chessAuthController.signup);
 router.post('/guestSignIn',     chessAuthController.guestSignIn);
 
 //Game Related Routes
-router.post('/checkingForMove', chessMoveController.getLatestMove);
-router.post('/moveMade',        chessMoveController.postMove);
-router.post('/finishedGame',    chessMoveController.deleteMove);
-router.post('/addMatch',        chessMatchController.addMatch);
 router.post('/getMatches',      chessMatchController.getMatches);
+router.post('/addMatch',        chessMatchController.addMatch);
 router.post('/lookForOpponent', chessMatchController.lookForOpponent);
 router.post('/acceptMatch',     chessMatchController.acceptMatch);
 router.post('/startMatch',      chessMatchController.startMatch);
+router.post('/checkingForMove', chessMoveController.getLatestMove);
+router.post('/moveMade',        chessMoveController.postMove);
+router.post('/finishedGame',    chessMoveController.deleteMove);
 
 module.exports = router;

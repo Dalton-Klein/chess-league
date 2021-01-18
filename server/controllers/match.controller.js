@@ -7,7 +7,7 @@ exports.getMatches = async (req, res) => {
     const tokenValid = await services.checkToken( email, token );
     if ( tokenValid === true ) {
       const allMatches = await ChessMatch.find()
-      console.log('♛ A Player Requested Matches ♛:  ', allMatches);
+      console.log('♛ A Player Requested Matches ♛:  ');
       res.send(allMatches);
     }
     else res.send({error: 'Not Authenticated'})
@@ -37,15 +37,13 @@ exports.addMatch = async (req, res) => {
 };
 
 exports.lookForOpponent = async (req, res) => {
-  console.log('♟️ CheckForOpponent ♟️:  ', req.body.username);
+  console.log('♟️ Checking For Opponent ♟️:  ', req.body.username);
   try {
     const { username, email, token } = req.body;
     const tokenValid = await services.checkToken( email, token );
     if ( tokenValid === true ) {
       let filter = { username: username }
-      const match = await ChessMatch.findOne(filter, function (err, docs) 
-        {console.log('Find Result : ', docs)} 
-      );
+      const match = await ChessMatch.findOne(filter);
       res.send(match);
     }
     else res.send({error: 'Not Authenticated'})
