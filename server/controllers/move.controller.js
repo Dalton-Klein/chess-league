@@ -30,12 +30,12 @@ exports.postMove = async (req, res) => {
         }
         else {
           const update = {$set :
-            { color: color, 
-              pieceName: pieceName, 
+            { color:      color, 
+              pieceName:  pieceName, 
               fromColumn: fromColumn, 
-              fromRow: fromRow,
-              toColumn: toColumn, 
-              toRow: toRow 
+              fromRow:    fromRow,
+              toColumn:   toColumn, 
+              toRow:      toRow 
             } 
           }
           moveSaving = await ChessMove.findOneAndUpdate(filter, update, { new: true, useFindAndModify: false })

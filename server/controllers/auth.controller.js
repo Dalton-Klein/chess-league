@@ -43,8 +43,8 @@ exports.signup = async (req, res) => {
       const newUser = ChessAuth.create({ email, username, hashed });
       let rating = 500;
       let rankLevel = 1;
-      let rankExp = 0;
-      const storeSave = ChessUserSave.create({ username, rating, rankLevel, rankExp})
+      let rankExp = wins = losses = draws = 0;
+      const storeSave = ChessUserSave.create({ username, rating, rankLevel, rankExp, wins, losses, draws})
       result = {success: 'User created'}
     } else {
       if (userCheck !== null) result = {error: 'Username is taken'};
