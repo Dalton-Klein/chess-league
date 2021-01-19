@@ -2,8 +2,8 @@
 const express = require('express');
 const cors = require('cors');
 const router = require('./router');
-const port = process.env.PORT 
-const localport = 3001;
+//process.env for heroku
+const port = process.env.PORT || 3001
 const app = express();
 
 app
@@ -17,7 +17,7 @@ const connection = require('./models/index');
   try {
     await connection;
     console.log('🌈😊 Database Is Connected 😊🌈');
-    app.listen(localport, () => {
+    app.listen(port, () => {
       console.log(`✨ Server started ✨ on Port: ${port}:  `);
     });
   } catch (error) {
