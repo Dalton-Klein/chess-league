@@ -18,7 +18,7 @@ exports.getLatestMove = async (req, res) => {
 
 exports.postMove = async (req, res) => {
   try {
-    const { email, token, matchid, color, pieceName, fromColumn, fromRow, toColumn, toRow } = req.body;
+    const { email, token, matchid, color, pieceName, fromColumn, fromRow, toColumn, toRow, winner } = req.body;
     const tokenValid = await services.checkToken( email, token );
     if ( tokenValid === true ) {
       console.log('♟️ A Player Moved ♟️:  ', req.body);
@@ -26,7 +26,7 @@ exports.postMove = async (req, res) => {
         const isFirstMove = await ChessMove.findOne(filter)
         let moveSaving;
         if (isFirstMove === [] || isFirstMove === null ) {
-          moveSaving = await ChessMove.create({ matchid, color, pieceName, fromColumn, fromRow, toColumn, toRow });
+          moveSaving = await ChessMove.create({ matchid, color, pieceName, fromColumn, fromRow, toColumn, toRow, winner });
         }
         else {
           const update = {$set :
@@ -35,7 +35,8 @@ exports.postMove = async (req, res) => {
               fromColumn: fromColumn, 
               fromRow:    fromRow,
               toColumn:   toColumn, 
-              toRow:      toRow 
+              toRow:      toRow,
+              winner:     winner  
             } 
           }
           moveSaving = await ChessMove.findOneAndUpdate(filter, update, { new: true, useFindAndModify: false })

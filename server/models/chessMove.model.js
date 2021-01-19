@@ -8,6 +8,7 @@ const TopicSchema = new Schema({
   fromRow:      {type: Number, default: 0},
   toColumn:     {type: Number, default: 0},
   toRow:        {type: Number, default: 0},
+  winner:       {type: String, required: true},
   published_at: {type: Date, default: Date.now},
 });
 
