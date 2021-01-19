@@ -3,11 +3,11 @@ const services = require('../services/services');
 
 exports.getMatches = async (req, res) => {
   try {
+    //console.log('♛ A Player Requested Matches ♛:  ');
     const { email, token } = req.body
     const tokenValid = await services.checkToken( email, token );
     if ( tokenValid === true ) {
       const allMatches = await ChessMatch.find()
-      console.log('♛ A Player Requested Matches ♛:  ');
       res.send(allMatches);
     } else res.send({error: 'Not Authenticated'})
   } catch (error) {
@@ -16,7 +16,7 @@ exports.getMatches = async (req, res) => {
 };
 
 exports.addMatch = async (req, res) => {
-  console.log('♟️ A Player Created A Match ♟️:  ', req.body);
+  //console.log('♟️ A Player Created A Match ♟️:  ', req.body);
   try {
     const { username, email, token, level, rating, time, opponent } = req.body;
     const tokenValid = await services.checkToken( email, token );
@@ -49,7 +49,7 @@ exports.removeMatch = async (req, res) => {
 }
 
 exports.lookForOpponent = async (req, res) => {
-  console.log('♟️ Checking For Opponent ♟️:  ', req.body.username);
+  //console.log('♟️ Checking For Opponent ♟️:  ', req.body.username);
   try {
     const { username, email, token } = req.body;
     const tokenValid = await services.checkToken( email, token );
@@ -64,17 +64,15 @@ exports.lookForOpponent = async (req, res) => {
 }
 
 exports.acceptMatch = async (req, res) => {
-  console.log('♟️ A Player ACCEPTED A Match ♟️:  ', req.body);
+  //console.log('♟️ A Player ACCEPTED A Match ♟️:  ', req.body);
   try {
     const { username, email, token, opponent } = req.body;
     const tokenValid = await services.checkToken( email, token );
     if ( tokenValid === true ) {
       let filter = { username: username }
       const update = { opponent: opponent }
-      const match = await ChessMatch.findOneAndUpdate(filter, update, { new: true }, (err, doc) => {
-        if (err) console.log('Error Updating Opponent');
-      })
-      console.log('Accepted Match & Updated Opponent: ', match);
+      const match = await ChessMatch.findOneAndUpdate(filter, update, { new: true })
+      //console.log('Accepted Match & Updated Opponent: ', match);
       res.send(match);
     } else res.send({error: 'Not Authenticated'})
   } catch (error) {
@@ -83,20 +81,15 @@ exports.acceptMatch = async (req, res) => {
 }
 
   exports.startMatch = async (req, res) => {
-    console.log('♟️ Two Players Started A Match ♟️:  ', req.body);
+    //console.log('♟️ Two Players Started A Match ♟️:  ', req.body);
     try {
       const { username, email, token } = req.body;
       const tokenValid = await services.checkToken( email, token );
       if ( tokenValid === true ) {
         let filter = { username: username }
-        const match = await ChessMatch.findOne(filter, function (err, doc) 
-          {if (err) console.log('Error Starting Match!!!')}
-        );
-        {console.log("Find Result : ", match)} 
+        const match = await ChessMatch.findOne(filter);
         res.send(match);
-        const removeMatch = await ChessMatch.findOneAndDelete(filter, function (err, docs) 
-          {if (err) console.log('Error Deleting Match!!!')} 
-        );
+        const removeMatch = await ChessMatch.findOneAndDelete(filter);
       } else res.send({error: 'Not Authenticated'})
     } catch (error) {
       res.sendStatus(500);

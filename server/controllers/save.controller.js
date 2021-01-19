@@ -6,7 +6,7 @@ exports.saveProgress = async (req, res) => {
     const { email, token, username, rating, rankLevel, rankExp, wins, losses, draws } = req.body;
     const tokenValid = await services.checkToken( email, token );
     if ( tokenValid === true ) {
-      console.log('♟️ A Player Updated Their Save ♟️:  ', req.body);
+      console.log('♟️ A Player Updated Their Save ♟️:  ', req.body.email);
       let filter = { username: username }
       const update = {$set :
         { username:  username, 
@@ -25,6 +25,5 @@ exports.saveProgress = async (req, res) => {
       else res.send({error: 'Not Authenticated'})
   } catch (error) {
     res.sendStatus(500);
-    console.log(error);
   }
 };

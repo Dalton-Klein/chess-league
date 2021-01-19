@@ -16,7 +16,6 @@ exports.checkToken = async ( email, token ) => {
   check = check[0];
   let result = '';
   if( check.email ) {
-    console.log(token, '   ', check.token);
     if ( check.token === token ) {
       result = true
       
