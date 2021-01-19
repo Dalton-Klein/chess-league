@@ -18,7 +18,7 @@ const connection = require('./models/index');
     await connection;
     console.log('🌈😊 Database Is Connected 😊🌈');
     app.listen(localport, () => {
-      console.log(`✨ Server started ✨ on Port: ${localport}:  `);
+      console.log(`✨ Server started ✨ on Port: ${port}:  `);
     });
   } catch (error) {
     console.log('There was an error: ', error);
