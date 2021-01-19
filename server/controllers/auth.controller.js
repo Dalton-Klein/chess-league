@@ -18,7 +18,17 @@ exports.signin = async (req, res) => {
         const deleteOldTokens = await ChessToken.deleteMany({email: email})
         const newToken = await ChessToken.create({ email, token });
         const userSave = await ChessUserSave.findOne({username: user.username})
-        result = {success: token, email: user.email, username: user.username, rating: userSave.rating, rankLevel: userSave.rankLevel, rankExp: userSave.rankExp}
+        result = {
+          success: token, 
+          email:     user.email, 
+          username:  user.username, 
+          rating:    userSave.rating, 
+          rankLevel: userSave.rankLevel, 
+          rankExp:   userSave.rankExp,
+          wins:      userSave.wins, 
+          losses:    userSave.losses,
+          draws:     userSave.draws
+        }
       }
       else result = {error: 'One of your credentials is incorrect!'};
     } else result = {error: 'One of your credentials is incorrect!'};

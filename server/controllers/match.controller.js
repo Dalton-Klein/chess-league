@@ -9,8 +9,7 @@ exports.getMatches = async (req, res) => {
       const allMatches = await ChessMatch.find()
       console.log('♛ A Player Requested Matches ♛:  ');
       res.send(allMatches);
-    }
-    else res.send({error: 'Not Authenticated'})
+    } else res.send({error: 'Not Authenticated'})
   } catch (error) {
     res.sendStatus(500);
   }
@@ -29,8 +28,7 @@ exports.addMatch = async (req, res) => {
       const match = await ChessMatch.create({ id, username, hostColor, level, rating, time, opponent });
       res.status(201);
       res.send(match);
-    }
-    else res.send({error: 'Not Authenticated'})
+    } else res.send({error: 'Not Authenticated'})
   } catch (error) {
     res.sendStatus(500);
   }
@@ -38,10 +36,13 @@ exports.addMatch = async (req, res) => {
 
 exports.removeMatch = async (req, res) => {
   try {
-    const { username } = req.body;
-    const filter = { username: username };
-    const matchRemoved = await ChessMatch.deleteMany(filter);
-    res.send({success: true})
+    const { username, email, token } = req.body;
+    const tokenValid = await services.checkToken( email, token );
+    if ( tokenValid === true ) {
+      const filter = { username: username };
+      const matchRemoved = await ChessMatch.deleteMany(filter);
+      res.send({success: true})
+    } else res.send({error: 'Not Authenticated'})
   } catch (error) {
     res.sendStatus(500);
   }
@@ -56,8 +57,7 @@ exports.lookForOpponent = async (req, res) => {
       let filter = { username: username }
       const match = await ChessMatch.findOne(filter);
       res.send(match);
-    }
-    else res.send({error: 'Not Authenticated'})
+    } else res.send({error: 'Not Authenticated'})
   } catch (error) {
     res.sendStatus(500);
   }
@@ -76,8 +76,7 @@ exports.acceptMatch = async (req, res) => {
       })
       console.log('Accepted Match & Updated Opponent: ', match);
       res.send(match);
-    }
-    else res.send({error: 'Not Authenticated'})
+    } else res.send({error: 'Not Authenticated'})
   } catch (error) {
     res.sendStatus(500);
   }
@@ -98,8 +97,7 @@ exports.acceptMatch = async (req, res) => {
         const removeMatch = await ChessMatch.findOneAndDelete(filter, function (err, docs) 
           {if (err) console.log('Error Deleting Match!!!')} 
         );
-      }
-      else res.send({error: 'Not Authenticated'})
+      } else res.send({error: 'Not Authenticated'})
     } catch (error) {
       res.sendStatus(500);
     }
