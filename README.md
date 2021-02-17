@@ -1,4 +1,4 @@
-# ChessLeague
+# ♟️ChessLeague♟️
 ChessLeague is an cross-platform multiplayer chess game set in a beautiful 3D environment. The app was built during my time at Codeworks as a solo project.
 
 <img src="./screenshots/ingamewlogo.png" width="30%"/>
