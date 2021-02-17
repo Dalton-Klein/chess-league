@@ -1,8 +1,6 @@
-//dalton Deadmau55
 const express = require('express');
 const cors = require('cors');
 const router = require('./router');
-//process.env for heroku
 const port = process.env.PORT || 3001
 const app = express();
 
