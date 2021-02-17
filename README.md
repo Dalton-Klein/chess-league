@@ -14,7 +14,7 @@ I felt that I could mock up a beautiful 3d environment, program the algorithms r
 
 Users can browse the game posts that are broadcast by other players looking for a game.
 
-<img src="./screenshots/matches.PNG" width="30%"/>
+<img src="./screenshots/matches.PNG" width="80%"/>
 
 
 ### View Profile Stats, Change Settings, Unlock Content
@@ -25,7 +25,7 @@ Users can:
 - They can alter their settings to their liking
 - View any owned or unlocked content that will customize their game
 
-<img src="./screenshots/account.PNG" width="30%"/>
+<img src="./screenshots/account.PNG" width="80%"/>
 
 ### Sign Up & Authentication to Registered Account or as Guest
 
@@ -33,7 +33,7 @@ Users have multiple sign in and sign up options. The key for a casual
 game like this is to make it as low friction as possbile to get 
 people playing.
 
-<img src="./screenshots/Login.PNG" width="30%"/>
+<img src="./screenshots/Login.PNG" width="80%"/>
 
 ## Getting Started
 Frontend <br></br>
