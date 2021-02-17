@@ -5,7 +5,7 @@ ChessLeague is an cross-platform multiplayer chess game set in a beautiful 3D en
 
 As an avid gamer, I'm frustrated by the lack of a sleek, modern versions of board games that do not utilize the capabilities of most modern gaming devices. 
 Many of the leading online chess games are still 2D and very basic in nature. Since chess in itself is not as complex relative to other types of online games, 
-I felt that I could mock up a beautiful 3d environment, program the algorithms required for the chess logic, and add in networking done through an express server and nodeJS.
+I felt that I could mock up a beautiful 3d environment, program the algorithms required for the chess logic, and add in networking done through an express server and nodeJS... all in a weeks time!
 
 
 ## Features
