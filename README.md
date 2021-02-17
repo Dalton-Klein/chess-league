@@ -1,9 +1,11 @@
-# ChessLeague
+# ♟️ChessLeague♟️
 ChessLeague is an cross-platform multiplayer chess game set in a beautiful 3D environment. The app was built during my time at Codeworks as a solo project.
+
+<img src="./screenshots/ingamewlogo.png" width="60%" justify-self="center"/>
 
 As an avid gamer, I'm frustrated by the lack of a sleek, modern versions of board games that do not utilize the capabilities of most modern gaming devices. 
 Many of the leading online chess games are still 2D and very basic in nature. Since chess in itself is not as complex relative to other types of online games, 
-I felt that I could mock up a beautiful 3d environment, program the algorithms required for the chess logic, and add in networking done through an express server and nodeJS.
+I felt that I could mock up a beautiful 3d environment, program the algorithms required for the chess logic, and add in networking done through an express server and nodeJS... all in a weeks time!
 
 
 ## Features
@@ -12,29 +14,26 @@ I felt that I could mock up a beautiful 3d environment, program the algorithms r
 
 Users can browse the game posts that are broadcast by other players looking for a game.
 
-<img src="./readMeAssets/AddBooks.gif" width="30%"/>
+<img src="./screenshots/matches.PNG" width="80%" />
 
 
-### View Profile Stats & Summary
+### View Profile Stats, Change Settings, Unlock Content
 
 Users can:
 
-- view the books they're currently reading
-- move books to the *Read* list and edit the read dates
-- view book in the *Want To Read*, and edit the read status
-- view books they've read in the past, and add a rating
+- View their career stats, and account level progress in an easy to read manner
+- They can alter their settings to their liking
+- View any owned or unlocked content that will customize their game
 
-
-<img src="./readMeAssets/ViewBooks.gif" width="30%"/>
-
+<img src="./screenshots/account.PNG" width="80%"/>
 
 ### Sign Up & Authentication to Registered Account or as Guest
 
-Users can search for books by author, title, or both!
+Users have multiple sign in and sign up options. The key for a casual
+game like this is to make it as low friction as possbile to get 
+people playing.
 
-
-<img src="./readMeAssets/Search.gif" width="30%"/>
-
+<img src="./screenshots/Login.PNG" width="80%"/>
 
 ## Getting Started
 Frontend <br></br>
@@ -58,7 +57,7 @@ Backend <br></br>
 - [Socket.io](https://socket.io/)
 - [MongoDB](https://www.mongodb.com/)
 - [MongooseJS](https://mongoosejs.com/)
-- [REST API]
+- REST API
 
 ## Future Plans
 
