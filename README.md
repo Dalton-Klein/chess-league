@@ -1,7 +1,7 @@
 # ♟️ChessLeague♟️
 ChessLeague is an cross-platform multiplayer chess game set in a beautiful 3D environment. The app was built during my time at Codeworks as a solo project.
 
-<img src="./screenshots/ingamewlogo.png" width="30%"/>
+<img src="./screenshots/ingamewlogo.png" width="60%" justify-self="center"/>
 
 As an avid gamer, I'm frustrated by the lack of a sleek, modern versions of board games that do not utilize the capabilities of most modern gaming devices. 
 Many of the leading online chess games are still 2D and very basic in nature. Since chess in itself is not as complex relative to other types of online games, 
@@ -14,7 +14,7 @@ I felt that I could mock up a beautiful 3d environment, program the algorithms r
 
 Users can browse the game posts that are broadcast by other players looking for a game.
 
-<img src="./screenshots/matches.PNG" width="60%" />
+<img src="./screenshots/matches.PNG" width="80%" />
 
 
 ### View Profile Stats, Change Settings, Unlock Content
