@@ -14,7 +14,7 @@ I felt that I could mock up a beautiful 3d environment, program the algorithms r
 
 Users can browse the game posts that are broadcast by other players looking for a game.
 
-<img src="./screenshots/matches.PNG" width="50%" justify-self="center"/>
+<img src="./screenshots/matches.PNG" width="60%" />
 
 
 ### View Profile Stats, Change Settings, Unlock Content
